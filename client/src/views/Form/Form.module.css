@@ -1,0 +1,86 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 60px;
+}
+
+.formLabel {
+  font-weight: bold;
+  text-decoration: underline;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.formTitle {
+    font-weight: bold;
+    font-size: 35px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+.formInput {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-top: 10px;
+}
+
+.formTextarea {
+  width: 100%;
+  height: 100px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-top: 10px;
+}
+
+.formError {
+  color: red;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.formCheckboxContainer {
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.formCheckboxContainer label {
+  flex-basis: 45%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.formCheckboxContainer input[type="checkbox"] {
+  margin-right: 8px;
+  margin-left: 8px;
+  margin-bottom: 10px;
+}
+
+.formButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.formButton {
+  padding: 20px 40px;
+  background-color: #030c03;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  border-radius: 8px;
+}
+
+.formButton:hover {
+  background-color: #4f504f;
+}

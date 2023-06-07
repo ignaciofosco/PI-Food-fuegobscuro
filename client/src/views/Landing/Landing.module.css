@@ -1,0 +1,89 @@
+.container {
+    height: 100vh;
+    overflow: hidden;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../utils/landing-background.jpg");
+    background-size: cover;
+  }
+  
+  .content {
+    position: absolute;
+    width: 45%;
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    margin: 12px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .btn {
+    background-color: #24242d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.5em; /* Decreased font size */
+    padding: 0.8rem; /* Decreased padding */
+    box-sizing: border-box;
+    margin: 12px;
+    font-family: 'Robot';
+    backdrop-filter: blur(1px);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    color: white;
+    transition: background-color 0.3s;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  
+  .btn:hover {
+    background-color: rgba(26, 26, 26, 0.7); /* Adjusted hover background color */
+  }
+  
+  .textDe {
+    text-decoration: none;
+    
+  }
+  
+  .title {
+    text-align: center;
+  }
+  
+  .link {
+    background-color: #24242d;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: 150px;
+    margin: 2px;
+    color: white;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  .link:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  
