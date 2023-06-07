@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { getAllRecipes, getSearchRecipes } from '../../redux/actions';
+import { getAllRecipes, getSearchRecipes, getRecipesByName } from '../../redux/actions';
 import style from "./SearchBar.module.css";
 
 const SearchBar = () => {
@@ -28,7 +28,7 @@ const SearchBar = () => {
     const handleSubmit = async (event) => {
         if (input !== "") {
             event.preventDefault();
-            dispatch(getSearchRecipes(input));
+            dispatch(getRecipesByName(input));
             setInput("");
         }
 
