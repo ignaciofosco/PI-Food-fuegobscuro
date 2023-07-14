@@ -10,19 +10,18 @@ const getAllDietsApi = async () => {
   const apiDiets = getApiDiets.data.results.map((name) => name.diets);
 
   const uniqueDiets = [];
-  let id = 1;
 
   apiDiets.forEach((diets) => {
     diets.forEach((diet) => {
       const exists = uniqueDiets.find((item) => item.name === diet);
 
       if (!exists) {
-        uniqueDiets.push({ id: id++, name: diet });
+        uniqueDiets.push({ name: diet });
       }
     });
   });
 
-  uniqueDiets.push({ id: id++, name: "vegetarian" });
+  uniqueDiets.push({ name: "vegetarian" });
 
   return uniqueDiets;
 };
