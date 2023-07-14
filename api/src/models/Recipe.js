@@ -17,8 +17,7 @@ module.exports = (sequelize) => {
 
     image: {
       type: DataTypes.STRING,
-      // defaultValue: '',
-      // allowNull: false,
+      allowNull: false,
     },
 
     summary: {
@@ -27,18 +26,17 @@ module.exports = (sequelize) => {
     },
       
     healthScore: {
-      type: DataTypes.STRING,
-      // defaultValue: 0,
-      // allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
 
     steps: {
       type: DataTypes.TEXT,
-      // allowNull: false,
+      allowNull: false,
     },
 
     createdInDb: {
-      type : DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: true,
       allowNull: false,
     }

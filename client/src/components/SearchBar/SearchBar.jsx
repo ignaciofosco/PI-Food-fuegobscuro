@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { getAllRecipes, getSearchRecipes, getRecipesByName } from '../../redux/actions';
 import style from "./SearchBar.module.css";
 
-const SearchBar = () => {
+const SearchBar = ({ setCurrentPage }) => {
 
     const dispatch = useDispatch();
     const [input, setInput] = useState("");
@@ -12,30 +12,37 @@ const SearchBar = () => {
         const inputValue = event.target.value;
         setInput(inputValue);
 
-        if (inputValue.trim() === "") {
-            dispatch(getAllRecipes());
-        } 
+        // if (inputValue.trim() === "") {
+        //     dispatch(getAllRecipes());
+        //     setCurrentPage(1);
+        // } 
         
-        else {
+        // else {
             const delayTimer = setTimeout(() => {
             dispatch(getSearchRecipes(inputValue));
-            }, 750); // Delay in milliseconds before triggering the search
-          
+            setCurrentPage(1);
+            }, 1000); // Delay in milliseconds before triggering the search
+            
             return () => clearTimeout(delayTimer); // Cleanup the timer on component unmount or input change
-        }
+        // }
     };
             
     const handleSubmit = async (event) => {
         if (input !== "") {
             event.preventDefault();
-            dispatch(getRecipesByName(input));
+            dispatch(getSearchRecipes(input));
             setInput("");
+            setCurrentPage(1);
         }
 
         else {
             event.preventDefault();
         }
     };
+
+    useEffect(() => {
+        setInput(''); // Reset the input value when the SearchBar component mounts
+      }, []);
 
     return (
         <form onSubmit={handleSubmit}>

@@ -12,8 +12,8 @@ import {
 } from "./actions"
 
 const initialState = {
-    recipes: [],
     allRecipes: [],
+    recipes: [],
     diets: [],
     recipeByName: undefined,
     recipeById: {},
@@ -48,7 +48,7 @@ const rootReducer = (state = initialState, action) => {
                 
         case GET_SEARCH_RECIPES:
             let searchFilter = [
-                ...state.allRecipes.filter((recipe) =>
+                ...state.recipes.filter((recipe) =>
                 recipe.name.toString().toLowerCase().includes(action.payload.toString().toLowerCase())
                 )
             ] 
@@ -88,39 +88,49 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case DIET_FILTER:
-            if (action.payload === 'all') {
-                return {
-                    ...state,
-                    allRecipes: state.recipes,
-                };
-            }
-              
-            return {
-                ...state,
-                allRecipes: state.recipes.filter((recipe) => recipe.diets.includes(action.payload)),
-            };
+          let filteredRecipesByDiet;
+        
+          if (action.payload === 'all') {
+            filteredRecipesByDiet = state.recipes
+          }
+          
+          else if (action.payload === 'vegetarian') {
+            filteredRecipesByDiet = state.recipes.filter((recipe) =>
+              recipe.diets.includes('vegetarian' && 'vegan')
+            );
+          }      
+          
+          else {
+            filteredRecipesByDiet = state.recipes.filter((recipe) =>
+              recipe.diets.includes(action.payload)
+            );
+          }
+        
+          return {
+            ...state,
+            allRecipes: filteredRecipesByDiet,
+          };
               
         case DBCREATED_FILTER:
-            if (action.payload === 'all') {
-              return {
-                ...state,
-                allRecipes: state.recipes,
-              };
-            } 
-            
-            else if (action.payload === 'api') {
-              return {
-                ...state,
-                allRecipes: state.recipes.filter((recipe) => !recipe.hasOwnProperty('createdInDb')),
-              };
-            }
-            
-            else {
-              return {
-                ...state,
-                allRecipes: state.recipes.filter((recipe) => recipe.hasOwnProperty('createdInDb')),
-              };
-            }
+          let filteredRecipesByDbCreated;
+        
+          if (action.payload === 'all') {
+            filteredRecipesByDbCreated = state.recipes;
+          } else if (action.payload === 'api') {
+            filteredRecipesByDbCreated = state.recipes.filter(
+              (recipe) => !recipe.hasOwnProperty('createdInDb')
+            );
+          } else {
+            filteredRecipesByDbCreated = state.recipes.filter(
+              (recipe) => recipe.hasOwnProperty('createdInDb')
+            );
+          }
+        
+          return {
+            ...state,
+            allRecipes: filteredRecipesByDbCreated,
+          };
+        
 
         case POST_RECIPE:
             return { ...state };

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router';
 import { getRecipeById } from '../../redux/actions';
 import styles from './RecipeDetail.module.css'
+import iconHeart from "../../utils/icons/health-score.svg"
 
 const RecipeDetail = () => {
   const { id } = useParams();
@@ -22,9 +23,18 @@ const RecipeDetail = () => {
   }
 
   const summaryCleaned = removeHtmlTags(recipe.summary);
-  const stepsFormat = recipe.steps?.map((s, i) => (
-    <p key={i}>{i + 1}- {s.step}</p>
-  ));
+  
+  let stepsFormat;
+
+  if (typeof recipe.steps === "string") {
+    stepsFormat = <p>{recipe.steps}</p>;
+  } else if (Array.isArray(recipe.steps)) {
+    stepsFormat = recipe.steps.map((step, index) => (
+      <p key={index}>{index + 1}- {step.step}</p>
+    ));
+  } else {
+    stepsFormat = <p>No steps available.</p>;
+  }
 
   return (
     <div className={styles.container}>
@@ -38,15 +48,30 @@ const RecipeDetail = () => {
       </div>
 
       <div className={styles.healthScore}>
+        <img src={iconHeart} alt="heart" className={styles.icon} />
         <h2>Health Score:</h2>
         <p>{recipe.healthScore}</p>
       </div>
 
-      <h2>Diets:</h2>
+      {/* <h2>Diets:</h2>
       <div className={styles.diets}>
         {recipe.diets?.map((diet) => (
           <li key={diet}>{diet[0].toUpperCase() + diet.slice(1)}</li>
         ))}
+      </div> */}
+
+      <h2>Diets:</h2>
+      <div className={styles.diets}>
+        {recipe.diets?.map((diet) => {
+          const capitalizedDiet =
+            typeof diet === "string"
+              ? diet.charAt(0).toUpperCase() + diet.slice(1)
+              : typeof diet === "object" && diet.name
+              ? diet.name.charAt(0).toUpperCase() + diet.name.slice(1)
+              : diet;
+
+          return <li key={diet}>{capitalizedDiet}</li>;
+        })}
       </div>
 
       <section className={styles.instructionSteps}>

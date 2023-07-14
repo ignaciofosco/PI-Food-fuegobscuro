@@ -6,7 +6,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url("../../utils/landing-background.jpg");
+    background-image: url("../../utils/backgrounds/landing-background.jpg");
     background-size: cover;
   }
   

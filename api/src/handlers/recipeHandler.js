@@ -54,6 +54,7 @@ const postRecipeHandler = async (req, res) => {
         summary,
         healthScore,
         steps,
+        diets
     } = req.body;
 
     try {
@@ -65,15 +66,15 @@ const postRecipeHandler = async (req, res) => {
             steps,
         });
             
-        if (!name) return res.status(400).json({error: 'Created recipe must contain a name'});
-        if (!summary) return res.status(400).json({error: 'Created recipe must contain a summary'});
+        // if (!name) return res.status(400).json({error: 'Created recipe must contain a name'});
+        // if (!summary) return res.status(400).json({error: 'Created recipe must contain a summary'});
         // if (healthScore < 0 || healthScore > 100) return res.status(400).json({error:'Health Score must be a value between 0-100'});
         // if (!healthScore) return res.status(400).json({error: 'Created recipe must contain a Health Score'});
         // if (!steps) return res.status(400).json({error: 'Created recipe must contain steps'});
 
         const findDietDb = await Diet.findAll({
             where: {
-                name: req.body.diets
+                name: diets
             }
         });
         // sacar el name: de acá?

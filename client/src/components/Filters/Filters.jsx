@@ -1,22 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterByDiet, filterByDbCreated} from '../../redux/actions';
 import style from "./Filters.module.css";
 
-const Filters = () => {
+const Filters = ({ setCurrentPage }) => {
 
     const dispatch = useDispatch();
-
-    const diets = useSelector(state => state.diets)
+    const diets = useSelector(state => state.diets);
 
     const handleChange = (event) => {
-        dispatch(filterByDiet("all"))
+        dispatch(filterByDiet("all"));
         dispatch(filterByDiet(event.target.value));
+        setCurrentPage(1);
     };
 
     const handleChangeDbOnly = (dbonly) => {
-        dispatch(filterByDbCreated(dbonly.target.value))
+        dispatch(filterByDbCreated(dbonly.target.value));
+        setCurrentPage(1);
     }
+
+    useEffect(() => {
+      setCurrentPage(1);
+    }, []);
 
     return (
       <div className={style.container}>

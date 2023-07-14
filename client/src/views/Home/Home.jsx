@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllRecipes, getAllDiets } from "../../redux/actions";
+import { getAllRecipes, getAllDiets, getRecipeById } from "../../redux/actions";
 import RecipesContainer from "../../components/RecipesContainer/RecipesContainer";
 import Filters from "../../components/Filters/Filters";
 import Orders from "../../components/Orders/Orders";
 import Pagination from "../../components/Pagination/Pagination";
+import NavBar from "../../components/NavBar/NavBar";
 import style from "./Home.module.css";
 
 const Home = () => {
@@ -23,29 +24,38 @@ const Home = () => {
         setCurrentPage(pageNumber)
     }
 //
+    // const handleClearAll = () => {
+    //  
+    // };
+
     useEffect(() => {
         dispatch(getAllDiets())
         dispatch(getAllRecipes());
+        // dispatch(getRecipeById([]));
     },[dispatch]);
 
     return (
         <>
+        <NavBar setCurrentPage={setCurrentPage} />
           <div className={style.containerHome}>
             <section className={style.section}>
               <div className={style.filtersOrders}>
               
                 <div>
-                  <Filters />
+                  <Filters setCurrentPage={setCurrentPage}/>
                 </div>
                 <div className={style.separator} />
                 <div >
-                  <Orders />
+                  <Orders setCurrentPage={setCurrentPage}/>
                 </div>
                 
               </div>
               <div className={style.clearAll}>
-                <a className={style.link} href="/home">Clear all</a>
+                <button className={style.link}>
+                  Clear all
+                </button>
               </div>
+              <Pagination recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} currentPage={currentPage} paginate={paginate} />
               <div className={style.cardContainer}>
                 <RecipesContainer currentRecipes={currentRecipes} />
               </div>

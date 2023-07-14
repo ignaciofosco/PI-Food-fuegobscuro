@@ -18,8 +18,8 @@ const RecipeCard = (props) => {
     <div className={style.card}>
       <div className={style.cardContent}>
         <img src={props.image} alt={props.name} className={style.cardImage} />
-        <p>{props.name}</p>
-        <p>Diets: {capitalizedDiets.join(", ")}</p>
+        <h2>{props.name}</h2>
+        <p><u><strong>Diets:</strong></u> {capitalizedDiets.join(", ")}</p>
       </div>
     </div>
   );
