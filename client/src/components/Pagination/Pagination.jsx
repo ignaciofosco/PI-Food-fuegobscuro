@@ -13,7 +13,7 @@ const Pagination = ({ recipesPerPage, allRecipes, currentPage, paginate }) => {
       <ul className={styles.pagination}>
         {currentPage > 1 && (
           <li className={styles.number}>
-            <button onClick={() => paginate(currentPage - 1)}>Previous Page</button>
+            <button onClick={() => paginate(currentPage - 1)}>{"<<"}</button>
           </li>
         )}
 
@@ -30,7 +30,7 @@ const Pagination = ({ recipesPerPage, allRecipes, currentPage, paginate }) => {
 
         {currentPage < pageNumbers.length && (
           <li className={styles.number}>
-            <button onClick={() => paginate(currentPage + 1)}>Next Page</button>
+            <button onClick={() => paginate(currentPage + 1)}>{">>"}</button>
           </li>
         )}
       </ul>

@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router';
-import { getRecipeById } from '../../redux/actions';
-import styles from './RecipeDetail.module.css'
-import iconHeart from "../../utils/icons/health-score.svg"
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { getRecipeById } from "../../redux/actions";
+import styles from "./RecipeDetail.module.css";
+import iconHeart from "../../utils/icons/health-score.svg";
 
 const RecipeDetail = () => {
   const { id } = useParams();
@@ -17,20 +17,22 @@ const RecipeDetail = () => {
   if (Object.keys(recipe).length === 0) {
     return <div>Loading...</div>;
   }
-  
+
   const removeHtmlTags = (text) => {
-    return text.replace(/<[^>]*>/g, '');
-  }
+    return text.replace(/<[^>]*>/g, "");
+  };
 
   const summaryCleaned = removeHtmlTags(recipe.summary);
-  
-  let stepsFormat;
 
+  let stepsFormat;
+  // FIX AND REMOVE ONCE STANDARIZED
   if (typeof recipe.steps === "string") {
     stepsFormat = <p>{recipe.steps}</p>;
   } else if (Array.isArray(recipe.steps)) {
     stepsFormat = recipe.steps.map((step, index) => (
-      <p key={index}>{index + 1}- {step.step}</p>
+      <p key={index}>
+        {index + 1}- {step.step}
+      </p>
     ));
   } else {
     stepsFormat = <p>No steps available.</p>;
@@ -53,23 +55,10 @@ const RecipeDetail = () => {
         <p>{recipe.healthScore}</p>
       </div>
 
-      {/* <h2>Diets:</h2>
-      <div className={styles.diets}>
-        {recipe.diets?.map((diet) => (
-          <li key={diet}>{diet[0].toUpperCase() + diet.slice(1)}</li>
-        ))}
-      </div> */}
-
       <h2>Diets:</h2>
       <div className={styles.diets}>
         {recipe.diets?.map((diet) => {
-          const capitalizedDiet =
-            typeof diet === "string"
-              ? diet.charAt(0).toUpperCase() + diet.slice(1)
-              : typeof diet === "object" && diet.name
-              ? diet.name.charAt(0).toUpperCase() + diet.name.slice(1)
-              : diet;
-
+          const capitalizedDiet = diet.charAt(0).toUpperCase() + diet.slice(1);
           return <li key={diet}>{capitalizedDiet}</li>;
         })}
       </div>
@@ -84,7 +73,6 @@ const RecipeDetail = () => {
       </section>
     </div>
   );
-
 };
 
 export default RecipeDetail;

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getAllRecipes, getAllDiets, postRecipe } from "../../redux/actions";
-import validation from "./validation";
-import styles from "./Form.module.css";
+import validations from "./validations";
+import styles from "./CreateForm.module.css";
 
-const Form = () => {
+const CreateForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const recipes = useSelector((state) => state.allRecipes);
@@ -38,7 +38,7 @@ const Form = () => {
       });
 
       setError(
-        validation(
+        validations(
           {
             ...form,
             diets: [...form.diets, value],
@@ -53,7 +53,7 @@ const Form = () => {
       });
 
       setError(
-        validation(
+        validations(
           {
             ...form,
             diets: form.diets.filter((diet) => diet !== value),
@@ -74,7 +74,7 @@ const Form = () => {
     });
 
     setError(
-      validation(
+      validations(
         {
           ...form,
           [property]: value,
@@ -86,11 +86,8 @@ const Form = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    setError(validation(form, recipes));
-
+    setError(validations(form, recipes));
     if (Object.entries(error).length === 0 && form.name.length) {
-      console.log("Form Data:", form); // Console log the form data
       dispatch(postRecipe(form));
       alert("Recipe created successfully!");
       history.push("/home");
@@ -103,7 +100,7 @@ const Form = () => {
     <div className={styles.formContainer}>
       <form onSubmit={(event) => handleSubmit(event)}>
         <div className={styles.formHeader}>
-          <h1 className={styles.formTitle}>Create your recipe!</h1>
+          <h1 className={styles.formTitle}>Create Your Recipe!</h1>
         </div>
 
         <div>
@@ -226,7 +223,7 @@ const Form = () => {
             onClick={handleSubmit}
             className={styles.formButton}
           >
-            Create recipe
+            Create Recipe
           </button>
         </div>
       </form>
@@ -234,4 +231,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default CreateForm;

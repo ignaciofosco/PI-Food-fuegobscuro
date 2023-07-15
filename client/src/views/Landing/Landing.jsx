@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import style from './Landing.module.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import style from "./Landing.module.css";
 
 const Landing = () => {
   return (

@@ -1,10 +1,14 @@
-const { Router } = require('express');
-const { getRecipeHandler, getRecipeIdHandler, postRecipeHandler } = require('../handlers/recipeHandler');
+const { Router } = require("express");
+const {
+  getRecipesHandler,
+  getRecipeByIdHandler,
+  postRecipeHandler,
+} = require("../handlers/recipeHandler");
 
 const router = Router();
 
-router.get('/', getRecipeHandler);
-router.get('/:id', getRecipeIdHandler);
-router.post('/', postRecipeHandler);
+router.get("/", getRecipesHandler);
+router.get("/:id", getRecipeByIdHandler);
+router.post("/create", postRecipeHandler);
 
 module.exports = router;

@@ -21,11 +21,6 @@ export const getAllRecipes = () => {
     const allRecipes = apiData.data;
 
     dispatch({ type: GET_ALL_RECIPES, payload: allRecipes });
-
-    // axios.get(urlAllRecipes)
-    // .then((response) => {
-    //     return dispatch({type: GET_ALL_RECIPES, payload: response.data })
-    // })
   };
 };
 
@@ -52,7 +47,6 @@ export const getRecipesByName = (name) => {
         dispatch({ type: GET_RECIPES_BY_NAME, payload: recipesByName });
       } catch (error) {
         dispatch({ type: GET_RECIPES_BY_NAME, payload: null });
-        alert("Recipe not found");
       }
     } else {
       dispatch({ type: GET_RECIPES_BY_NAME });
@@ -84,7 +78,7 @@ export const getSearchRecipes = (name) => {
 export const postRecipe = (form) => {
   return async function (dispatch) {
     try {
-      await axios.post(`${URL_API}/recipes`, form);
+      await axios.post(`${URL_API}/recipes/create`, form);
 
       dispatch({ type: POST_RECIPE });
     } catch (error) {

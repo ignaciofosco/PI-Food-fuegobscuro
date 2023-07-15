@@ -1,4 +1,4 @@
-const validation = (
+const validations = (
   { name, summary, healthScore, steps, image, diets },
   recipe,
 ) => {
@@ -25,31 +25,26 @@ const validation = (
   // HEALTH SCORE
   if (!healthScore) {
     errors.healthScore = "Created recipe must contain a Health Score";
-  } else if (healthScore.toString().length > 3) {
-    errors.healthScore = "The health score can't be longer than 3 characters";
   } else if (healthScore <= 0) {
-    errors.healthScore = "Health score can't be less than or equal to 0";
+    errors.healthScore = "Health Score can't be less than or equal to 0";
   } else if (healthScore > 100) {
     errors.healthScore = "Health score can't be greater than 100";
   } else if (healthScore.toString().startsWith("0")) {
-    errors.healthScore = "Health score can't start with 0";
+    errors.healthScore = "Health Score can't start with 0";
   }
 
   // STEPS
   if (!steps) {
     errors.steps = "Created recipe must contain instruction steps";
-  } else if (steps.length < 50) {
-    errors.steps = "Instruction steps can't be less than 50 characters";
-  } else if (steps.length > 1500) {
-    errors.steps = "Instruction steps can't be longer than 1500 characters";
+  } else if (steps.length > 1000) {
+    errors.steps = "Instruction steps can't be longer than 1000 characters";
   }
 
   // IMAGE
   if (!image) {
     errors.image = "Created recipe must contain an image";
   } else if (!RegExpression.test(image)) {
-    errors.image =
-      "Image URL does not meet the requirements (JPG, JPEG, GIF, PNG, BMP)";
+    errors.image = "Image URL does not meet the format requirements";
   }
 
   // DIETS
@@ -57,11 +52,7 @@ const validation = (
     errors.diets = "Must choose at least one diet";
   }
 
-  if (Object.keys(errors).length > 0) {
-    return res.status(400).json({ errors });
-  }
-
-  return null;
+  return Object.keys(errors).length > 0 ? errors : null;
 };
 
-module.exports = validation;
+module.exports = validations;

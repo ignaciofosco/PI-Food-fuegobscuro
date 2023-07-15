@@ -7,8 +7,6 @@ const getApiRecipes = async () => {
     `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`,
   );
 
-  console.log("apiUrl: ", apiUrl);
-
   const apiRecipes = await apiUrl.data.results.map((data) => {
     return {
       id: data.id,
