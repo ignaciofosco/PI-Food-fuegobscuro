@@ -6,12 +6,10 @@ const getDietsHandler = async (req, res) => {
 
     res.status(200).json(diets);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        error: "An error occurred while fetching diets",
-        details: error.message,
-      });
+    res.status(500).json({
+      error: "An error occurred while fetching diets",
+      details: error.message,
+    });
   }
 };
 
@@ -31,12 +29,10 @@ const getDietByIdHandler = async (req, res) => {
       res.status(200).json(diet);
     }
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        error: "An error occurred while fetching the diet",
-        details: error.message,
-      });
+    res.status(500).json({
+      error: "An error occurred while fetching the diet",
+      details: error.message,
+    });
   }
 };
 

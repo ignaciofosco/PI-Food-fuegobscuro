@@ -1,15 +1,15 @@
-.inputSearch{
-    outline: none;
-    border-radius: 12px;
-    padding: 5px;
-    padding-left: 15px;
-    height: 28px;
-    width: 150px;
-    border: none;
-    transition: width 0.5s;
-    background: rgb(77, 75, 86) ;
-    color: rgba(229, 233, 236, 0.767);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 14px;
-    text-align: left;
+.inputSearch {
+  outline: none;
+  border-radius: 12px;
+  padding: 5px;
+  padding-left: 15px;
+  height: 28px;
+  width: 150px;
+  border: none;
+  transition: width 0.5s;
+  background: rgb(77, 75, 86);
+  color: rgba(229, 233, 236, 0.767);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 14px;
+  text-align: left;
 }

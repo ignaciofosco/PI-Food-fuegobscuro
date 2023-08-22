@@ -39,6 +39,7 @@ const Home = () => {
   return (
     <>
       <NavBar setCurrentPage={setCurrentPage} />
+
       <div className={style.containerHome}>
         <section className={style.section}>
           <div className={style.filtersOrders}>
@@ -54,12 +55,14 @@ const Home = () => {
             <button className={style.link}>Clear all</button>
           </div>
         </section>
+
         <Pagination
           recipesPerPage={recipesPerPage}
           allRecipes={allRecipes.length}
           currentPage={currentPage}
           paginate={paginate}
         />
+
         <div className={style.cardContainer}>
           <RecipesContainer currentRecipes={currentRecipes} />
         </div>
