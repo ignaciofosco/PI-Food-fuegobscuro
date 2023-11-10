@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Pagination.module.css";
 
-const Pagination = ({ recipesPerPage, allRecipes, currentPage, paginate }) => {
+const Pagination = ({ recipesPerPage, pageRecipes, currentPage, paginate }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(pageRecipes / recipesPerPage); i++) {
     pageNumbers.push(i);
   }
 

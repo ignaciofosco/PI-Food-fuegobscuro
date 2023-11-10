@@ -17,6 +17,9 @@ h2 {
 img {
   display: block;
   margin: 0 auto;
+  width: 312px;
+  height: 231px; 
+  object-fit: cover; 
 }
 
 .summary {

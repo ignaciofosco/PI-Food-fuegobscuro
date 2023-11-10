@@ -12,8 +12,8 @@ import {
 } from "./actions";
 
 const initialState = {
-  allRecipes: [],
   recipes: [],
+  temporal: [],
   diets: [],
   recipeByName: undefined,
   recipeById: {},
@@ -22,7 +22,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_RECIPES:
-      return { ...state, recipes: action.payload, allRecipes: action.payload };
+      return { ...state, recipes: action.payload, temporal: action.payload };
 
     case GET_ALL_DIETS:
       return { ...state, diets: action.payload };
@@ -53,44 +53,44 @@ const rootReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        allRecipes: searchFilter,
-        // allRecipes: searchFilter.length === 0 ? ["Recipe not found"] : searchFilter
+        temporal: searchFilter,
+        // temporal: searchFilter.length === 0 ? ["Recipe not found"] : searchFilter
       };
 
     case ORDER_ALPHABETICALLY:
       let sortedRecipesAlphabetically;
 
       if (action.payload === "a-z") {
-        sortedRecipesAlphabetically = [...state.allRecipes].sort((a, b) =>
+        sortedRecipesAlphabetically = [...state.temporal].sort((a, b) =>
           a.name > b.name ? 1 : a.name < b.name ? -1 : 0,
         );
       } else {
-        sortedRecipesAlphabetically = [...state.allRecipes].sort((a, b) =>
+        sortedRecipesAlphabetically = [...state.temporal].sort((a, b) =>
           a.name > b.name ? -1 : a.name < b.name ? 1 : 0,
         );
       }
 
       return {
         ...state,
-        allRecipes: sortedRecipesAlphabetically,
+        temporal: sortedRecipesAlphabetically,
       };
 
     case ORDER_SCORE:
       let sortedRecipesByScore;
 
       if (action.payload === "asc") {
-        sortedRecipesByScore = [...state.allRecipes].sort(
+        sortedRecipesByScore = [...state.temporal].sort(
           (a, b) => a.healthScore - b.healthScore,
         );
       } else {
-        sortedRecipesByScore = [...state.allRecipes].sort(
+        sortedRecipesByScore = [...state.temporal].sort(
           (a, b) => b.healthScore - a.healthScore,
         );
       }
 
       return {
         ...state,
-        allRecipes: sortedRecipesByScore,
+        temporal: sortedRecipesByScore,
       };
 
     case DIET_FILTER:
@@ -110,7 +110,7 @@ const rootReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        allRecipes: filteredRecipesByDiet,
+        temporal: filteredRecipesByDiet,
       };
 
     case DBCREATED_FILTER:
@@ -130,7 +130,7 @@ const rootReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        allRecipes: filteredRecipesByDbCreated,
+        temporal: filteredRecipesByDbCreated,
       };
 
     case POST_RECIPE:

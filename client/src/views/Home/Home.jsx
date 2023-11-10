@@ -11,13 +11,13 @@ import style from "./Home.module.css";
 const Home = () => {
   const dispatch = useDispatch();
   //Pagination
-  const allRecipes = useSelector((state) => state.allRecipes);
+  const pageRecipes = useSelector((state) => state.temporal);
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage, setRecipesPerPage] = useState(9);
 
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  const currentRecipes = allRecipes.slice(
+  const currentRecipes = pageRecipes.slice(
     indexOfFirstRecipe,
     indexOfLastRecipe,
   );
@@ -58,7 +58,7 @@ const Home = () => {
 
         <Pagination
           recipesPerPage={recipesPerPage}
-          allRecipes={allRecipes.length}
+          pageRecipes={pageRecipes.length}
           currentPage={currentPage}
           paginate={paginate}
         />
@@ -69,7 +69,7 @@ const Home = () => {
 
         <Pagination
           recipesPerPage={recipesPerPage}
-          allRecipes={allRecipes.length}
+          pageRecipes={pageRecipes.length}
           currentPage={currentPage}
           paginate={paginate}
         />

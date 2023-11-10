@@ -8,7 +8,7 @@ import styles from "./CreateForm.module.css";
 const CreateForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const recipes = useSelector((state) => state.allRecipes);
+  const recipes = useSelector((state) => state.recipes);
   const diets = useSelector((state) => state.diets);
 
   const [error, setError] = useState({});
@@ -17,7 +17,7 @@ const CreateForm = () => {
     name: "",
     summary: "",
     healthScore: "",
-    steps: "",
+    steps: [{ number: 1, step: "" }],
     image: "",
     diets: [],
   });
@@ -43,8 +43,8 @@ const CreateForm = () => {
             ...form,
             diets: [...form.diets, value],
           },
-          recipes,
-        ),
+          recipes
+        )
       );
     } else if (!checked) {
       setForm({
@@ -58,8 +58,8 @@ const CreateForm = () => {
             ...form,
             diets: form.diets.filter((diet) => diet !== value),
           },
-          recipes,
-        ),
+          recipes
+        )
       );
     }
   };
@@ -68,10 +68,31 @@ const CreateForm = () => {
     const property = event.target.name;
     const value = event.target.value;
 
-    setForm({
-      ...form,
-      [property]: value,
-    });
+    if (property === "steps") {
+      const stepNumber = parseInt(event.target.getAttribute("data-step"), 10);
+      const updatedSteps = form.steps.map((step) =>
+        step.number === stepNumber ? { ...step, step: value } : step
+      );
+
+      setForm((prevForm) => ({
+        ...prevForm,
+        [property]: updatedSteps,
+      }));
+
+      // Check if the last step is not empty before adding a new step
+      const lastStep = updatedSteps[updatedSteps.length - 1];
+      if (stepNumber === form.steps.length && lastStep.step.trim() !== "") {
+        setForm((prevForm) => ({
+          ...prevForm,
+          steps: [...updatedSteps, { number: lastStep.number + 1, step: "" }],
+        }));
+      }
+    } else {
+      setForm((prevForm) => ({
+        ...prevForm,
+        [property]: value,
+      }));
+    }
 
     setError(
       validations(
@@ -79,8 +100,8 @@ const CreateForm = () => {
           ...form,
           [property]: value,
         },
-        recipes,
-      ),
+        recipes
+      )
     );
   };
 
@@ -154,15 +175,20 @@ const CreateForm = () => {
 
         <div>
           <label className={styles.formLabel}>Step-by-step instructions:</label>
-          <textarea
-            type="text"
-            placeholder="Steps"
-            value={form.steps}
-            name="steps"
-            onChange={(event) => handleChange(event)}
-            required
-            className={styles.formTextarea}
-          />
+          {form.steps.map((step) => (
+            <div key={step.number}>
+              <label>{`Step ${step.number}:`}</label>
+              <textarea
+                type="text"
+                value={step.step}
+                name="steps"
+                onChange={(event) => handleChange(event)}
+                required
+                className={styles.formTextarea}
+                data-step={step.number}
+              />
+            </div>
+          ))}
           {error.steps ? (
             <span className={styles.formError}>*{error.steps}</span>
           ) : undefined}
