@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Pagination.module.css";
 
-const Pagination = ({ recipesPerPage, allRecipes, currentPage, paginate }) => {
+const Pagination = ({ recipesPerPage, pageRecipes, currentPage, paginate }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(pageRecipes / recipesPerPage); i++) {
     pageNumbers.push(i);
   }
 
@@ -13,7 +13,7 @@ const Pagination = ({ recipesPerPage, allRecipes, currentPage, paginate }) => {
       <ul className={styles.pagination}>
         {currentPage > 1 && (
           <li className={styles.number}>
-            <button onClick={() => paginate(currentPage - 1)}>Previous Page</button>
+            <button onClick={() => paginate(currentPage - 1)}>{"<<"}</button>
           </li>
         )}
 
@@ -30,7 +30,7 @@ const Pagination = ({ recipesPerPage, allRecipes, currentPage, paginate }) => {
 
         {currentPage < pageNumbers.length && (
           <li className={styles.number}>
-            <button onClick={() => paginate(currentPage + 1)}>Next Page</button>
+            <button onClick={() => paginate(currentPage + 1)}>{">>"}</button>
           </li>
         )}
       </ul>
